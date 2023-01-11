@@ -15,16 +15,6 @@ h1 {
 .container {
   text-align: center;
 }
-.footer {
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  height: 100px;
-  width: 100%;
-  color: azure;
-  font-size: 1.5rem;
-  background-color: cadetblue;
-}
 .images img {
   width: 200px;
   height: 200px;
@@ -35,5 +25,5 @@ h1 {
 .time {
   font-size: 50px;
   font-weight: bold;
-  border-bottom: 5px solid cadetblue;
+  border: 5px solid cadetblue;
 }
