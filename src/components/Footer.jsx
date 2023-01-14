@@ -3,9 +3,9 @@ import "../index.css";
 function Footer() {
   const date = new Date();
   return (
-    <div className="footer">
-      <p>&copy;{date.getFullYear()}</p>
-    </div>
+    <footer>
+      <p>God Of Code &copy;{date.getFullYear()}</p>
+    </footer>
   );
 }
 export default Footer;
