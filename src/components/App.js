@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import Note from "./Note";
 import Card from "./Card";
 import data from "../info";
+import DictionaryCard from "./DictionaryCard";
+import emojipedia from "../emojipedia";
 ///////////////////////////////////
 function createCard(props) {
   return (
@@ -21,25 +23,25 @@ function App() {
     <div>
       <Nav />
       <div className="container">
-        <Note />
         <div>
-          {data.map(createCard)}
-          {/* <Card
-            src={data[0].src}
-            title={data[0].title}
-            content={data[0].content}
-          />
-          <Card
-            src={data[1].src}
-            title={data[1].title}
-            content={data[1].content}
-          />
-          <Card
-            src={data[2].src}
-            title={data[2].title}
-            content={data[2].content}
-          /> */}
+          <h1>
+            <span>emojipedia</span>
+          </h1>
+          <dl className="dictionary">
+            {emojipedia.map((props) => {
+              return (
+                <DictionaryCard
+                  key={props.id}
+                  emoji={props.emoji}
+                  name={props.name}
+                  meaning={props.meaning}
+                />
+              );
+            })}
+          </dl>
         </div>
+        <Note />
+        <div>{data.map(createCard)}</div>
       </div>
       <Footer />
     </div>
