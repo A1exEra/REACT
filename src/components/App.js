@@ -7,6 +7,7 @@ import data from "../info";
 import DictionaryCard from "./DictionaryCard";
 import emojipedia from "../emojipedia";
 import Login from "./Form/Login";
+import Counter from "./Counter/Counter";
 ///////////////////////////////////
 function createCard(props) {
   return (
@@ -24,6 +25,7 @@ function App() {
     <div>
       <Nav />
       <div className="container">
+        <Counter />
         <div className="formContainer">
           <Login />
         </div>
