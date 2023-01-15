@@ -2,34 +2,37 @@ import "./App.css";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import Note from "./Note";
-import Card from "./Card";
-import data from "../info";
-import DictionaryCard from "./DictionaryCard";
-import emojipedia from "../emojipedia";
-import Login from "./Form/Login";
-import Counter from "./Counter/Counter";
+import FormEvent from "./FormsEvent/FormsEvent";
+// import GetTime from "./GetTime/GetTime";
+// import Card from "./Card";
+// import data from "../info";
+// import DictionaryCard from "./DictionaryCard";
+// import emojipedia from "../emojipedia";
+// import Login from "./Form/Login";
+// import Counter from "./Counter/Counter";
 ///////////////////////////////////
-function createCard(props) {
-  return (
-    <Card
-      key={props.id}
-      src={props.src}
-      title={props.title}
-      content={props.content}
-      id={props.id}
-    />
-  );
-}
+// function createCard(props) {
+//   return (
+//     <Card
+//       key={props.id}
+//       src={props.src}
+//       title={props.title}
+//       content={props.content}
+//       id={props.id}
+//     />
+//   );
+// }
 function App() {
   return (
     <div>
       <Nav />
       <div className="container">
-        <Counter />
-        <div className="formContainer">
+        <FormEvent />
+        {/* <Counter /> */}
+        {/* <div className="formContainer">
           <Login />
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <h1>
             <span>emojipedia</span>
           </h1>
@@ -45,9 +48,10 @@ function App() {
               );
             })}
           </dl>
-        </div>
+        </div> */}
         <Note />
-        <div>{data.map(createCard)}</div>
+        {/* <GetTime /> */}
+        {/* <div>{data.map(createCard)}</div> */}
       </div>
       <Footer />
     </div>
