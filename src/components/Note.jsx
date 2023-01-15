@@ -1,8 +1,8 @@
-function Note() {
+function Note(params) {
   return (
     <div className="note">
-      <h1>This is the title of the note</h1>
-      <p>This is the content of the note component</p>
+      <h1>{params.title}</h1>
+      <p>{params.content}</p>
     </div>
   );
 }
