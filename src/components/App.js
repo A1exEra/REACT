@@ -6,6 +6,7 @@ import Card from "./Card";
 import data from "../info";
 import DictionaryCard from "./DictionaryCard";
 import emojipedia from "../emojipedia";
+import Login from "./Form/Login";
 ///////////////////////////////////
 function createCard(props) {
   return (
@@ -23,6 +24,9 @@ function App() {
     <div>
       <Nav />
       <div className="container">
+        <div className="formContainer">
+          <Login />
+        </div>
         <div>
           <h1>
             <span>emojipedia</span>
