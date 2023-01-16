@@ -2,7 +2,8 @@ import "./App.css";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import Note from "./Note";
-import FormEvent from "./FormsEvent/FormsEvent";
+import FormStateChallenge from "./FormsEvent/FormsStateChallenge";
+// import FormEvent from "./FormsEvent/FormsEvent";
 // import GetTime from "./GetTime/GetTime";
 // import Card from "./Card";
 // import data from "../info";
@@ -27,7 +28,8 @@ function App() {
     <div>
       <Nav />
       <div className="container">
-        <FormEvent />
+        <FormStateChallenge />
+        {/* <FormEvent /> */}
         {/* <Counter /> */}
         {/* <div className="formContainer">
           <Login />
