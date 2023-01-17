@@ -1,8 +1,9 @@
 import "./App.css";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import Note from "./Note";
-import FormStateChallenge from "./FormsEvent/FormsStateChallenge";
+import ToDo from "./SpreadToDo/ToDo";
+// import Note from "./Note";
+// import FormStateChallenge from "./FormsEvent/FormsStateChallenge";
 // import FormEvent from "./FormsEvent/FormsEvent";
 // import GetTime from "./GetTime/GetTime";
 // import Card from "./Card";
@@ -27,14 +28,15 @@ function App() {
   return (
     <div>
       <Nav />
-      <div className="container">
-        <FormStateChallenge />
-        {/* <FormEvent /> */}
-        {/* <Counter /> */}
-        {/* <div className="formContainer">
+      <ToDo />
+      {/* <div className="container"> */}
+      {/* <FormStateChallenge /> */}
+      {/* <FormEvent /> */}
+      {/* <Counter /> */}
+      {/* <div className="formContainer">
           <Login />
         </div> */}
-        {/* <div>
+      {/* <div>
           <h1>
             <span>emojipedia</span>
           </h1>
@@ -51,10 +53,10 @@ function App() {
             })}
           </dl>
         </div> */}
-        <Note />
-        {/* <GetTime /> */}
-        {/* <div>{data.map(createCard)}</div> */}
-      </div>
+      {/* <Note /> */}
+      {/* <GetTime /> */}
+      {/* <div>{data.map(createCard)}</div> */}
+      {/* </div> */}
       <Footer />
     </div>
   );
