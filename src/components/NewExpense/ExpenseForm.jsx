@@ -13,9 +13,16 @@ const ExpenseForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = expense;
+    //problems with rendering date(different format) so this is just a woraround to render it correctly
+    expenseData.amount = +expense.amount;
+    expenseData.date = new Date(
+      expense.date.slice(0, 4),
+      expense.date.slice(5, 7) - 1,
+      expense.date.slice(8)
+    );
+    //////////////////////////////////
     props.onSaveExpenseData(expenseData);
     setExpense({ title: "", amount: "", date: "" });
-    // console.log(expenseData);
   };
   return (
     <form onSubmit={submitHandler}>
@@ -54,8 +61,15 @@ const ExpenseForm = (props) => {
           />
         </div>
       </div>
-      <div className="new-expense__actions">
-        <button type="submit">Submit</button>
+      <div className="form-buttons">
+        <div className="new-expense__actions">
+          <button type="button" onClick={props.isActiveHandler}>
+            CANCEL
+          </button>
+        </div>
+        <div className="new-expense__actions">
+          <button type="submit">ADD</button>
+        </div>
       </div>
     </form>
   );

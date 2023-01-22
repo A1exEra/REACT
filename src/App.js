@@ -5,11 +5,8 @@ import NewExpense from "./components/NewExpense/NewExpense";
 function App() {
   const [expensesArr, setExpenses] = useState(expenses);
   const addExpenseHandler = (newExpense) => {
-    console.log("New Expense Added");
-    console.log(newExpense);
-    setExpenses((prevState) => [...prevState, newExpense]);
+    setExpenses((prevState) => [newExpense, ...prevState]);
   };
-  console.log(expensesArr);
 
   return (
     <div className="container">
