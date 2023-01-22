@@ -1,9 +1,9 @@
 import "./ExpenseForm.css";
 import { useState } from "react";
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [expense, setExpense] = useState({
-    title: "Add new expense...",
-    amount: 10,
+    title: "",
+    amount: "",
     date: "",
   });
   const handleChange = (event) => {
@@ -13,8 +13,9 @@ const ExpenseForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = expense;
-    setExpense({ title: "Add new title...", amount: 0.1, date: "" });
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
+    setExpense({ title: "", amount: "", date: "" });
+    // console.log(expenseData);
   };
   return (
     <form onSubmit={submitHandler}>
@@ -25,6 +26,7 @@ const ExpenseForm = () => {
             type="text"
             name="title"
             value={expense.title}
+            placeholder="Add expense..."
             onChange={handleChange}
           />
         </div>
@@ -37,6 +39,7 @@ const ExpenseForm = () => {
             name="amount"
             value={expense.amount}
             onChange={handleChange}
+            placeholder="£££"
           />
         </div>
         <div className="new-expense__control">
