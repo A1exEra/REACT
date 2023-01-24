@@ -11,7 +11,8 @@ const FormInput = (props) => {
     const { name, value } = event.target;
     setUserData((prevState) => ({ ...prevState, [name]: value }));
   };
-  const submitHandler = () => {
+  const submitHandler = (event) => {
+    event.preventDefault();
     const id = Math.floor(Math.random() * 100 + 1);
     const submittedData = { id: `${id}`, ...userData, age: +userData.age };
     setUserData({ name: "", age: "" });
@@ -19,9 +20,11 @@ const FormInput = (props) => {
   };
   return (
     <Card>
-      <form onChange={changeHandler} className="form-input">
+      <form onSubmit={submitHandler} className="form-input">
         <div className="mb-3 ">
-          <label className="form-label">User Name:</label>
+          <label htmlFor="name" className="form-label">
+            User Name:
+          </label>
           <input
             type="text"
             className="form-control"
@@ -29,10 +32,13 @@ const FormInput = (props) => {
             placeholder="John"
             name="name"
             value={userData.name}
+            onChange={changeHandler}
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">User Age</label>
+          <label htmlFor="age" className="form-label">
+            User Age
+          </label>
           <input
             type="number"
             className="form-control"
@@ -42,13 +48,10 @@ const FormInput = (props) => {
             min="18"
             max="99"
             value={userData.age}
+            onChange={changeHandler}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={submitHandler}
-        >
+        <button type="submit" className="btn btn-primary">
           ADD
         </button>
       </form>
