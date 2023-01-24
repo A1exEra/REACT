@@ -3,14 +3,19 @@ import "./FormInput.css";
 import Card from "../UI/Card";
 const FormInput = (props) => {
   const [userData, setUserData] = useState({
-    userName: "",
-    userAge: "",
+    name: "",
+    age: "",
   });
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setUserData((prevState) => ({ ...prevState, [name]: value }));
+  };
+  const submitHandler = () => {
+    const id = Math.floor(Math.random() * 100 + 1);
+    const submittedData = { id: `${id}`, ...userData, age: +userData.age };
+    setUserData({ name: "", age: "" });
+    props.addUser(submittedData);
   };
   return (
     <Card>
@@ -22,8 +27,8 @@ const FormInput = (props) => {
             className="form-control"
             id="user"
             placeholder="John"
-            name="userName"
-            value={userData.userName}
+            name="name"
+            value={userData.name}
           />
         </div>
         <div className="mb-3">
@@ -33,13 +38,17 @@ const FormInput = (props) => {
             className="form-control"
             id="age"
             placeholder="age (years)"
-            name="userAge"
+            name="age"
             min="18"
             max="99"
-            value={userData.userAge}
+            value={userData.age}
           />
         </div>
-        <button type="button" className="btn btn-primary">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={submitHandler}
+        >
           ADD
         </button>
       </form>
