@@ -1,0 +1,10 @@
+/* .form-button {
+  display: flex;
+  justify-content: flex-end;
+} */
+.invalid input {
+  border: 1px solid red;
+}
+.invalid label {
+  color: red;
+}

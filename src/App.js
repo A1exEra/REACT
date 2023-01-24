@@ -15,11 +15,17 @@ function App() {
     console.log("New User was Added", user);
     setRegisteredUsers((prevState) => [user, ...prevState]);
   };
+  const onDelete = (id) => {
+    setRegisteredUsers((prevState) => [
+      ...prevState.filter((el) => el.id !== id),
+    ]);
+    console.log(`Item was deleted: ${registeredUsers}`);
+  };
   return (
     <div className="App">
       <h1>Jacked Up And Good To Go!</h1>
       <FormInput addUser={onAddUser} />
-      <Users users={registeredUsers} />
+      <Users users={registeredUsers} onDelete={onDelete} />
     </div>
   );
 }

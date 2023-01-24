@@ -4,14 +4,18 @@ import "./Users.css";
 import User from "./User/User";
 const Users = (props) => {
   console.log(props.users);
-  //   const [users, setUsers] = useState(props.users);
+  const [users, setUsers] = useState(props.users);
   return (
     <Card>
-      <ul className="list-group">
-        {props.users.map((user) => (
-          <User user={user} key={user.id} />
-        ))}
-      </ul>
+      {props.users.length < 1 ? (
+        <h3>No users have been registered yet</h3>
+      ) : (
+        <ul className="list-group">
+          {props.users.map((user) => (
+            <User user={user} key={user.id} onDelete={props.onDelete} />
+          ))}
+        </ul>
+      )}
     </Card>
   );
 };
