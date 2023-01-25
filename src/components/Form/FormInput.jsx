@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 // import "./FormInput.css";
 import classes from "./FormInput.module.css";
 import Card from "../UI/Card";
@@ -6,6 +6,8 @@ import Button from "../UI/Button";
 import Modal from "../Modal/Modal";
 import Wrapper from "../Helpers/Wrapper";
 const FormInput = (props) => {
+  const nameRef = useRef();
+  const ageRef = useRef();
   const [userData, setUserData] = useState({
     name: "",
     age: "",
@@ -23,6 +25,8 @@ const FormInput = (props) => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(nameRef.current.value);
+    console.log(ageRef.current.value);
     //check if inputs are valid
     if (userData.name.trim().length < 1 || userData.age.trim().length < 1) {
       console.log("Invalid input!");
@@ -75,6 +79,7 @@ const FormInput = (props) => {
               name="name"
               value={userData.name}
               onChange={changeHandler}
+              ref={nameRef}
             />
           </div>
           <div className={`mb-3 ${!isError.isValid && classes.invalid}`}>
@@ -89,6 +94,7 @@ const FormInput = (props) => {
               name="age"
               value={userData.age}
               onChange={changeHandler}
+              ref={ageRef}
             />
           </div>
           <Button type="submit">Add User</Button>
