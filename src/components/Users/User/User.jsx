@@ -1,3 +1,4 @@
+import React from "react";
 // import classes from "./User.module.css";
 import { useState } from "react";
 import "./User.css";
@@ -21,7 +22,7 @@ const User = (props) => {
     setChangeState((prevState) => ({ ...prevState, edit: true }));
   };
   return (
-    <div>
+    <React.Fragment>
       {changeState.delete && (
         <Modal
           title={`Delete ${props.user.name}?`}
@@ -44,7 +45,7 @@ const User = (props) => {
           </Button>
         </div>
       </li>
-    </div>
+    </React.Fragment>
   );
 };
 export default User;

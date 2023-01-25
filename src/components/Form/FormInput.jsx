@@ -4,6 +4,7 @@ import classes from "./FormInput.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import Modal from "../Modal/Modal";
+import Wrapper from "../Helpers/Wrapper";
 const FormInput = (props) => {
   const [userData, setUserData] = useState({
     name: "",
@@ -52,7 +53,7 @@ const FormInput = (props) => {
     console.log("MODAL CLOSED");
   };
   return (
-    <div>
+    <Wrapper>
       {!isError.isValid && (
         <Modal
           title={isError.title}
@@ -93,7 +94,7 @@ const FormInput = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 export default FormInput;

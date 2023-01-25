@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import "./App.css";
 import FormInput from "./components/Form/FormInput";
@@ -22,11 +23,11 @@ function App() {
     console.log(`Item was deleted: ${registeredUsers}`);
   };
   return (
-    <div className="App">
+    <React.Fragment className="App">
       <h1>Jacked Up And Good To Go!</h1>
       <FormInput addUser={onAddUser} />
       <Users users={registeredUsers} onDelete={onDelete} />
-    </div>
+    </React.Fragment>
   );
 }
 
