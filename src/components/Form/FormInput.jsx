@@ -90,9 +90,6 @@ const FormInput = (props) => {
               onChange={changeHandler}
             />
           </div>
-          {/* <button type="submit" className="btn btn-primary">
-          ADD
-        </button> */}
           <Button type="submit">Add User</Button>
         </form>
       </Card>
