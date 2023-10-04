@@ -25,14 +25,10 @@ h1,h2,h3 {
 }
 
 h4,
-h5 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h6,
-p {
+h5,h6,p {
   font-family: 'Ubuntu', sans-serif;
 }
+
 ul {
   list-style-type: none;
 }
