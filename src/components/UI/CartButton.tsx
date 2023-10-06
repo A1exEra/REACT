@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { styled } from 'styled-components';
 import CartIcon from '../Cart/CartIcon';
 import { CartContext } from '../../store/ContextProvider';
 import { CART_ITEM } from '../../types';
 function CartButton(props: { onClick: () => void }) {
-  const [btnIsHoghlighted, setBtnIsHoghlighted] = useState<boolean>(false);
+  const [btnishighlighted, setBtnIsHoghlighted] = useState<boolean>(false);
   const { items } = useContext(CartContext);
   const cartItems = items.reduce((acc, item: CART_ITEM) => {
     return acc + item.amount!;
@@ -22,7 +22,7 @@ function CartButton(props: { onClick: () => void }) {
   return (
     <StyledCartButton
       onClick={props.onClick}
-      btnIsHighlighted={btnIsHoghlighted}>
+      $btnishighlighted={btnishighlighted}>
       <span className="icon">
         <CartIcon />
       </span>
@@ -31,7 +31,7 @@ function CartButton(props: { onClick: () => void }) {
   );
 }
 interface StyledCartButtonProps {
-  btnIsHighlighted: boolean;
+  $btnishighlighted: boolean;
 }
 const StyledCartButton = styled.button<StyledCartButtonProps>`
   cursor: pointer;
@@ -45,11 +45,8 @@ const StyledCartButton = styled.button<StyledCartButtonProps>`
   align-items: center;
   border-radius: 25px;
   font-weight: bold;
-  ${(props) =>
-    props.btnIsHighlighted &&
-    css`
-      animation: bump 300ms ease-out;
-    `}
+  animation: ${({ $btnishighlighted }) =>
+    $btnishighlighted && 'bump 300ms ease-out'};
   &:hover,
   &:active {
     background-color: #2c0d00;
