@@ -5,9 +5,8 @@ import Section from './UI/Section';
 import { TASK } from '../types';
 function Tasks(props: {
   items: TASK[];
-  error: { message: string } | null;
+  error: string | null;
   loading: boolean;
-  onFetch: () => Promise<void>;
 }) {
   let taskList: JSX.Element | null = (
     <h2>No tasks found. Start adding some!</h2>
@@ -26,7 +25,7 @@ function Tasks(props: {
   let content: JSX.Element | string = taskList;
 
   if (props.error) {
-    content = <button onClick={props.onFetch}>Try again</button>;
+    content = <h3>Error! Couldnot fetch data!</h3>;
   }
 
   if (props.loading) {
@@ -48,6 +47,20 @@ const Styled = styled.div`
     margin: 0;
     padding: 0;
     text-align: left;
+  }
+  button {
+    cursor: pointer;
+    font: inherit;
+    background-color: #7a0144;
+    border: 1px solid #7a0144;
+    border-radius: 20px;
+    padding: 0.5rem 2rem;
+    color: white;
+    &:hover,
+    &:active {
+      background-color: #9c095a;
+      border-color: #9c095a;
+    }
   }
 `;
 export default Tasks;

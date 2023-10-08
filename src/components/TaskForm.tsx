@@ -41,5 +41,19 @@ const Styles = styled.form`
       border-color: #7a0144;
     }
   }
+  button {
+    cursor: pointer;
+    font: inherit;
+    background-color: #7a0144;
+    border: 1px solid #7a0144;
+    border-radius: 20px;
+    padding: 0.5rem 2rem;
+    color: white;
+    &:hover,
+    &:active {
+      background-color: #9c095a;
+      border-color: #9c095a;
+    }
+  }
 `;
 export default TaskForm;

@@ -6,39 +6,39 @@ import { useState, useEffect } from 'react';
 import NewTask from './components/NewTask';
 import Tasks from './components/Tasks';
 import { TASK } from './types';
+import useHttp from './hooks/useHTTP';
 const URL = import.meta.env.VITE_URL;
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<{ message: string } | null>(null);
   const [tasks, setTasks] = useState<TASK[]>([]);
-  const fetchTasks = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${URL}hooks.json`);
+  // const transformTaks = useCallback((tasksObj: TASK[]) => {
+  //   const loadedTasks = [];
 
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
+  //   for (const taskKey in tasksObj) {
+  //     loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
+  //   }
 
-      const data = await response.json();
+  //   setTasks(loadedTasks);
+  // }, []);
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
+  useEffect(() => {
+    console.log('APP_USEEFFECT');
+    const transformTaks = (tasksObj: TASK[]) => {
       const loadedTasks = [];
 
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
       }
 
       setTasks(loadedTasks);
-    } catch (err: Error | any) {
-      setError(err.message || 'Something went wrong!');
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+    };
+    fetchTasks(
+      {
+        URL: `${URL}`,
+      },
+      transformTaks
+    );
+  }, [fetchTasks]);
 
   const taskAddHandler = (task: TASK) => {
     setTasks((prevTasks) => [...prevTasks, task]);
@@ -48,12 +48,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <NewTask onAddTask={taskAddHandler} />
-        <Tasks
-          items={tasks}
-          loading={isLoading}
-          error={error}
-          onFetch={fetchTasks}
-        />
+        <Tasks items={tasks} loading={isLoading} error={error} />
       </ThemeProvider>
     </>
   );
