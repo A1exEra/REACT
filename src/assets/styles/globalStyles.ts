@@ -1,8 +1,6 @@
-// globalStyles.ts
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-/* @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto&family=Ubuntu&display=swap'); */
 :root {
   background-color: #242424;
   font-synthesis: none;
