@@ -16,3 +16,10 @@ export interface CART_ITEM {
   amount: number;
   price: number;
 }
+export interface ORDER_FORM {
+  // name: string;
+  // street: string;
+  // postCode: string;
+  // city: string;
+  [key: string]: string;
+}

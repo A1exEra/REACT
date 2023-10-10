@@ -71,7 +71,7 @@ const cartReducer = (
     };
   }
   if (action.type === 'EMPTY_CART') {
-    return { items: [], totalAmount: 0 };
+    return defaultCartState;
   }
   return defaultCartState;
 };
@@ -92,7 +92,7 @@ function ContextProvider(props: { children: ReactNode }) {
       id: id,
     });
   };
-  const emptyCart = () => {
+  const emptyCartHandler = () => {
     dispatchCartAction({
       type: 'EMPTY_CART',
     });
@@ -103,7 +103,7 @@ function ContextProvider(props: { children: ReactNode }) {
     totalAmount: cartState.totalAmount,
     addItem: addItemToCart,
     removeItem: removeItemFromCart,
-    emptyCart: emptyCart,
+    emptyCart: emptyCartHandler,
   };
 
   return (

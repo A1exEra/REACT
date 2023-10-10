@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
-import { CART_ITEM } from '../../types';
+import { CART_ITEM, ORDER_FORM } from '../../types';
 import Modal from '../UI/Modal';
 import { useContext, useState } from 'react';
 import { CartContext } from '../../store/ContextProvider';
 import CartItem from './CartItem';
-// import useHttp from '../../hooks/useHTTP';
-// import LoadingSpinner from '../UI/LoadingSpinner';
+import useHttp from '../../hooks/useHTTP';
+import LoadingSpinner from '../UI/LoadingSpinner';
 import Checkout from './Checkout';
-// const URL = import.meta.env.VITE_FOODIE_URL;
+const URL = import.meta.env.VITE_FOODIE_URL;
 function Cart({ onCloseCart }: { onCloseCart: () => void }) {
-  // const { isLoading, sendRequest: submitOrder } = useHttp();
+  const { isLoading, sendRequest: submitOrder } = useHttp();
   const [isCheckout, setIsCheckout] = useState<boolean>(false);
+  const [didSubmit, setDidSubmit] = useState<boolean>(false);
   const cartContext = useContext(CartContext);
   const isCartEmpty = cartContext.items.length > 0 ? false : true;
   const onItemAddHandler = (item: CART_ITEM) => {
@@ -23,30 +24,29 @@ function Cart({ onCloseCart }: { onCloseCart: () => void }) {
   const orderHandler = () => {
     setIsCheckout(true);
   };
-  // const getFetchedOrders = (order: CART_ITEM[], orderData: any) => {
-  //   const generatedId = orderData.name; // firebase-specific => "name" contains generated id
-  //   const fetchedOrder = { id: generatedId, order };
-  //   console.log(fetchedOrder);
-  // };
-  // const onOrderSubmitHandler = async () => {
-  //   submitOrder(
-  //     {
-  //       url: `${URL}/orders.json`,
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: { order: cartContext.items },
-  //     },
-  //     getFetchedOrders.bind(null, cartContext.items)
-  //   );
-  //   cartContext.emptyCart();
-  // };
-  // if (isLoading) {
-  //   return (
-  //     <Modal onClick={onCloseCart}>
-  //       <LoadingSpinner />
-  //     </Modal>
-  //   );
-  // }
+  const getFetchedOrders = (order: any, orderData: any) => {
+    const generatedId = orderData.name; // firebase-specific => "name" contains generated id
+    const fetchedOrder = { id: generatedId, order };
+    console.log(fetchedOrder);
+  };
+  const orderSubmitHandler = async (userData: ORDER_FORM) => {
+    const order: { userData: ORDER_FORM; orderedFoods: CART_ITEM[] } = {
+      userData,
+      orderedFoods: cartContext.items,
+    };
+    submitOrder(
+      {
+        url: `${URL}/orders.json`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: { order },
+      },
+      getFetchedOrders.bind(null, order)
+    );
+    cartContext.emptyCart();
+    setIsCheckout(false);
+    setDidSubmit(true);
+  };
   const cartItems = (
     <ul className="cart-items">
       {cartContext.items.map((item: CART_ITEM) => (
@@ -59,31 +59,48 @@ function Cart({ onCloseCart }: { onCloseCart: () => void }) {
       ))}
     </ul>
   );
+
+  const cartModalContent = (
+    <>
+      {cartItems}
+      <div className="total">
+        <span>
+          <h4>Total Amount</h4>
+        </span>
+        <span>
+          <h4>${cartContext.totalAmount.toFixed(2)}</h4>
+        </span>
+      </div>
+      {isCheckout ? (
+        <Checkout onCancel={onCloseCart} onConfirm={orderSubmitHandler} />
+      ) : (
+        <div className="actions">
+          <button className="button--alt" onClick={onCloseCart}>
+            Close
+          </button>
+          {!isCartEmpty && (
+            <button className="button" onClick={orderHandler}>
+              Order
+            </button>
+          )}
+        </div>
+      )}
+    </>
+  );
   return (
     <Modal onClick={onCloseCart}>
       <Styled>
-        {cartItems}
-        <div className="total">
-          <span>
-            <h4>Total Amount</h4>
-          </span>
-          <span>
-            <h4>${cartContext.totalAmount.toFixed(2)}</h4>
-          </span>
-        </div>
-        {isCheckout ? (
-          <Checkout onCancel={onCloseCart} />
-        ) : (
-          <div className="actions">
-            <button className="button--alt" onClick={onCloseCart}>
-              Close
-            </button>
-            {!isCartEmpty && (
-              <button className="button" onClick={orderHandler}>
-                Order
+        {!isLoading && !didSubmit && cartModalContent}
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && didSubmit && (
+          <>
+            <p>Order was submitted!</p>
+            <div className="actions">
+              <button className="button" onClick={onCloseCart}>
+                Close
               </button>
-            )}
-          </div>
+            </div>
+          </>
         )}
       </Styled>
     </Modal>
