@@ -8,6 +8,7 @@ export const CartContext = createContext({
   // totalPrice: 0,
   addItem: (item: CART_ITEM) => {},
   removeItem: (id: string) => {},
+  emptyCart: () => {},
 });
 
 const defaultCartState = {
@@ -69,6 +70,9 @@ const cartReducer = (
       totalAmount: updatedTotalAmount,
     };
   }
+  if (action.type === 'EMPTY_CART') {
+    return { items: [], totalAmount: 0 };
+  }
   return defaultCartState;
 };
 function ContextProvider(props: { children: ReactNode }) {
@@ -82,10 +86,15 @@ function ContextProvider(props: { children: ReactNode }) {
       item: item,
     });
   };
-  const removeItemToCart = (id: string) => {
+  const removeItemFromCart = (id: string) => {
     dispatchCartAction({
       type: 'REMOVE',
       id: id,
+    });
+  };
+  const emptyCart = () => {
+    dispatchCartAction({
+      type: 'EMPTY_CART',
     });
   };
 
@@ -93,7 +102,8 @@ function ContextProvider(props: { children: ReactNode }) {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCart,
-    removeItem: removeItemToCart,
+    removeItem: removeItemFromCart,
+    emptyCart: emptyCart,
   };
 
   return (

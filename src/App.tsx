@@ -6,7 +6,7 @@ import Meals from './components/Meals/Meals';
 import Cart from './components/Cart/Cart';
 import { useState } from 'react';
 import ContextProvider from './store/ContextProvider';
-import StarWars from './components/StarWars/StarWars';
+
 function App() {
   const [cartIsShown, setCartIsShown] = useState<boolean>(false);
   const showCartHandler = () => {
@@ -24,7 +24,7 @@ function App() {
           <Header onShowCart={showCartHandler} />
           <main>
             <Meals />
-            <StarWars />
+            {/* <StarWars /> */}
           </main>
         </ContextProvider>
       </ThemeProvider>
