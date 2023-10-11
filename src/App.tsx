@@ -1,13 +1,13 @@
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './assets/styles/globalStyles';
 import theme from './assets/styles/theme';
-import Test from './components/Test';
+import Counter from './components/Counter';
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Test />
+        <Counter />
       </ThemeProvider>
     </>
   );
