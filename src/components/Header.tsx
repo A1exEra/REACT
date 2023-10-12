@@ -1,22 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-
+import authSlice from '../store/authSlice';
 const Header = () => {
+  const { isAuthenticated } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(authSlice.actions.logout());
+  };
+  const navItems = (
+    <nav>
+      <ul>
+        <li>
+          <a href="/">
+            <p>Products</p>
+          </a>
+        </li>
+        <li>
+          <a href="/">
+            <p>Sales</p>
+          </a>
+        </li>
+        <li>
+          <button onClick={logoutHandler}>Logout</button>
+        </li>
+      </ul>
+    </nav>
+  );
   return (
     <Styled>
       <h1>Redux Auth</h1>
-      <nav>
-        <ul>
-          <li>
-            <a href="/">My Products</a>
-          </li>
-          <li>
-            <a href="/">My Sales</a>
-          </li>
-          <li>
-            <button>Logout</button>
-          </li>
-        </ul>
-      </nav>
+      {isAuthenticated ? (
+        navItems
+      ) : (
+        <p className="error">Use login form to view this content!</p>
+      )}
     </Styled>
   );
 };
@@ -29,9 +47,18 @@ const Styled = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3c0080;
+  background-color: ${({ theme }) => theme.colors.secondary500};
   color: white;
-  padding: 0 10%;
+  padding: 0 1rem;
+  h1 {
+    font-size: ${({ theme }) => theme.fontSizes.textXl};
+  }
+  p {
+    font-size: ${({ theme }) => theme.fontSizes.text20};
+  }
+  .error {
+    color: red;
+  }
   ul {
     display: flex;
     list-style: none;

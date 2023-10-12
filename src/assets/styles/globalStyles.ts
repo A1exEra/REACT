@@ -39,18 +39,25 @@ a {
 button {
   font-family: 'Oswald';
   cursor: pointer;
-  background-color: #747bff;
-  border: 1px solid #535bf2;
-  color: white;
+  background-color: #535bf2;
+  border: 1px solid #747bff;
+  color: ${({ theme }) => theme.colors.whiteSecondary};
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
   padding: 0.5rem 1.5rem;
   border-radius: 6px;
+  &:disabled {
+      background-color: #4a4160;
+      border-color: #747bff;
+    }
+    &:hover,
+    &:active {
+      background-color: #747bff;
+      border-color: #535bf2;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    }
 }
 
-button:hover,
-button:active {
-  background-color: #535bf2;
-  border-color: #747bff
-}
 `;
 
 export default GlobalStyle;
