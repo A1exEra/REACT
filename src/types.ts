@@ -8,8 +8,14 @@ export interface BOOK {
   description: string;
 }
 export interface CART_ITEM {
+  id?: string;
   title: string;
   quantity: number;
   total: number;
   price: number;
+}
+export interface NOTIFICATION {
+  status: string;
+  title: string;
+  message: string;
 }

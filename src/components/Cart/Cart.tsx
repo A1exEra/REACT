@@ -1,16 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
 import Card from '../UI/Card';
 import CartItem from './CartItem';
-
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { CART_ITEM } from '../../types';
 const Cart = () => {
+  const { cartItems } = useSelector((state: any) => state.cart);
   return (
     <Styled>
       <Card className="cart">
         <h2>Your Shopping Cart</h2>
         <ul>
-          <CartItem
-            item={{ title: 'Test Item', quantity: 3, total: 18, price: 6 }}
-          />
+          {cartItems.length > 0 ? (
+            cartItems.map(
+              ({ title, price, id, total, quantity }: CART_ITEM) => (
+                <CartItem
+                  key={id}
+                  item={{ title, quantity, total, price, id }}
+                />
+              )
+            )
+          ) : (
+            <p>Your shopping cart is empty</p>
+          )}
         </ul>
       </Card>
     </Styled>

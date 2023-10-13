@@ -1,7 +1,15 @@
 import Card from '../UI/Card';
 import styled from 'styled-components';
 import { BOOK } from '../../types';
-const ProductItem = ({ title, price, description }: BOOK) => {
+import { useDispatch } from 'react-redux';
+import { cartActions, uiActions } from '../../store/store';
+const ProductItem = ({ title, price, description, id }: BOOK) => {
+  const dispatch = useDispatch();
+  const onClickHandler = () => {
+    const item = { title, price, total: price, quantity: 1, id };
+    dispatch(cartActions.addItemToCart(item));
+    dispatch(uiActions.setIsInitial());
+  };
   return (
     <Styled>
       <Card>
@@ -11,7 +19,7 @@ const ProductItem = ({ title, price, description }: BOOK) => {
         </header>
         <p>{description}</p>
         <div className="actions">
-          <button>Add to Cart</button>
+          <button onClick={onClickHandler}>Add to Cart</button>
         </div>
       </Card>
     </Styled>

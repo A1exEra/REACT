@@ -1,9 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from '../../store/store';
 const CartButton = () => {
+  const dispatch = useDispatch();
+  const { totalCartItems } = useSelector((state: any) => state.cart);
+  const onClickHandler = () => {
+    dispatch(uiActions.toggleCart());
+  };
   return (
-    <Styled>
+    <Styled onClick={onClickHandler}>
       <span>My Cart</span>
-      <span className="badge">1</span>
+      <span className="badge">{totalCartItems}</span>
     </Styled>
   );
 };

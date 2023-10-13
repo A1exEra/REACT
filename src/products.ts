@@ -1,5 +1,5 @@
 import { BOOK } from './types';
-export const books: BOOK[] = [
+const books: BOOK[] = [
   {
     id: 1,
     price: 19.99,
@@ -61,3 +61,4 @@ export const books: BOOK[] = [
     description: 'The first book in the Harry Potter series by J.K. Rowling.',
   },
 ];
+export default books;

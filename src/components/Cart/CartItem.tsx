@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { CART_ITEM } from '../../types';
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../../store/store';
 const CartItem = (props: { item: CART_ITEM }) => {
-  const { title, quantity, total, price } = props.item;
-
+  const { title, quantity, total, price, id } = props.item;
+  const dispatch = useDispatch();
+  const onRemoveHandler = () => {
+    dispatch(cartActions.removeItemFromCart(id));
+  };
+  const onAddHandler = () => {
+    dispatch(cartActions.addItemToCart(props.item));
+  };
   return (
     <Styled className="item">
       <header>
@@ -17,8 +25,8 @@ const CartItem = (props: { item: CART_ITEM }) => {
           x <span>{quantity}</span>
         </div>
         <div className="actions">
-          <button>-</button>
-          <button>+</button>
+          <button onClick={onRemoveHandler}>-</button>
+          <button onClick={onAddHandler}>+</button>
         </div>
       </div>
     </Styled>
