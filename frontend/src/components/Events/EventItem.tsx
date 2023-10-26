@@ -1,0 +1,57 @@
+import styled from 'styled-components';
+import { EVENT } from '../../types';
+import { Link } from 'react-router-dom';
+
+const EventItem = (props: { event: EVENT }) => {
+  const { event } = props;
+  function startDeleteHandler() {
+    // ...
+  }
+
+  return (
+    <Styled>
+      <img src={event.image} alt={event.title} />
+      <h1>{event.title}</h1>
+      <time>{event.date}</time>
+      <p>{event.description}</p>
+      <menu className="actions">
+        <Link to="edit">Edit</Link>
+        <button onClick={startDeleteHandler}>Delete</button>
+      </menu>
+    </Styled>
+  );
+};
+
+export default EventItem;
+
+const Styled = styled.article`
+  max-width: 50rem;
+  margin: 2rem auto;
+  text-align: center;
+  img {
+    width: 30rem;
+    border-radius: 4px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    a,
+    button {
+      padding: 0.25rem 1rem;
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: ${({ theme }) => theme.colors.primary800};
+    }
+  }
+`;
