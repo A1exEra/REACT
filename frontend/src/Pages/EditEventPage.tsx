@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-
+import EventForm from '../components/Events/EventForm';
+import { useRouteLoaderData } from 'react-router-dom';
+import { EVENT } from '../types';
 const EditEventPage = () => {
-  return <Styled>EditEventPage</Styled>;
+  const data = useRouteLoaderData('event-detail') as EVENT;
+  return <EventForm method="patch" event={data} />;
 };
 
 export default EditEventPage;
-
-const Styled = styled.div``;

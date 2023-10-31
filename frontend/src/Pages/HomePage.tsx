@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import PageContent from '../components/PageContent';
 
 const HomePage = () => {
-  return <Styled>HomePage</Styled>;
+  return (
+    <PageContent title="Welcome!">
+      <h2>Browse our Amazingly HOT events!</h2>
+    </PageContent>
+  );
 };
 
 export default HomePage;
-
-const Styled = styled.div``;

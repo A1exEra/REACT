@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { EVENT } from '../../types';
 
-const EventsList = ({ events }: any) => {
+const EventsList = ({ events }: { events: EVENT[] }) => {
   return (
     <Styled>
       <h1>All Events</h1>
       <ul className="list">
         {events.map((event: any) => (
           <li key={event.id} className="item">
-            <a href="...">
+            <Link to={event.id}>
               <img src={event.image} alt={event.title} />
               <div className="content">
                 <h2>{event.title}</h2>
                 <time>{event.date}</time>
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

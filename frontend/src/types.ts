@@ -8,3 +8,4 @@ export interface EVENT {
   image: string;
   description: string;
 }
+export type EVENT_DATA = Omit<EVENT, 'id'>;

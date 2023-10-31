@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 import { EVENT } from '../../types';
-import { Link } from 'react-router-dom';
+import { Link, useSubmit } from 'react-router-dom';
 
-const EventItem = (props: { event: EVENT }) => {
-  const { event } = props;
+const EventItem = ({ event }: { event: EVENT }) => {
+  const submit = useSubmit();
   function startDeleteHandler() {
-    // ...
+    const isDeletionConfirmed = window.confirm(
+      'Are you sure you want to delete?'
+    );
+    if (isDeletionConfirmed) {
+      console.log('DELETING...');
+      submit(null, { method: 'delete' });
+    }
   }
-
   return (
     <Styled>
       <img src={event.image} alt={event.title} />
@@ -21,7 +26,6 @@ const EventItem = (props: { event: EVENT }) => {
     </Styled>
   );
 };
-
 export default EventItem;
 
 const Styled = styled.article`

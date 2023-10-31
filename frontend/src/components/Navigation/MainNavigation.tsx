@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import NewsLetterSignup from '../NewsLetterSignup';
 const MainNavigation = () => {
   return (
     <Styled>
@@ -19,8 +20,16 @@ const MainNavigation = () => {
               Events
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="newsletter"
+              className={({ isActive }) => (isActive ? 'active' : undefined)}>
+              Newsletter
+            </NavLink>
+          </li>
         </ul>
       </nav>
+      <NewsLetterSignup />
     </Styled>
   );
 };

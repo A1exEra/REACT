@@ -1,9 +1,6 @@
-import styled from 'styled-components';
-
+import EventForm from '../components/Events/EventForm';
 const NewEventPage = () => {
-  return <Styled>NewEventPage</Styled>;
+  return <EventForm method="post" />;
 };
 
 export default NewEventPage;
-
-const Styled = styled.div``;
