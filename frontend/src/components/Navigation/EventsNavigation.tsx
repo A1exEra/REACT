@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteLoaderData } from 'react-router-dom';
+import { ReactNode } from 'react';
 const EventsNavigation = () => {
+  const token = useRouteLoaderData('root');
   return (
     <Styled>
       <nav>
@@ -13,13 +15,15 @@ const EventsNavigation = () => {
               All Events
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/events/new"
-              className={({ isActive }) => (isActive ? 'active' : '')}>
-              New Event
-            </NavLink>
-          </li>
+          {(token as ReactNode) && (
+            <li>
+              <NavLink
+                to="/events/new"
+                className={({ isActive }) => (isActive ? 'active' : '')}>
+                New Event
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </Styled>
@@ -41,8 +45,8 @@ const Styled = styled.header`
       padding: 0.5rem 1.5rem;
       border-radius: 4px;
       text-decoration: none;
-      a:hover,
-      a:active {
+      &:hover,
+      &:active {
         background-color: ${({ theme }) => theme.colors.primary600};
       }
     }

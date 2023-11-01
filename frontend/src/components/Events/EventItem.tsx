@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { EVENT } from '../../types';
-import { Link, useSubmit } from 'react-router-dom';
+import { Link, useRouteLoaderData, useSubmit } from 'react-router-dom';
+import { ReactNode } from 'react';
 
 const EventItem = ({ event }: { event: EVENT }) => {
+  const token = useRouteLoaderData('root') as ReactNode;
   const submit = useSubmit();
   function startDeleteHandler() {
     const isDeletionConfirmed = window.confirm(
@@ -19,10 +21,12 @@ const EventItem = ({ event }: { event: EVENT }) => {
       <h1>{event.title}</h1>
       <time>{event.date}</time>
       <p>{event.description}</p>
-      <menu className="actions">
-        <Link to="edit">Edit</Link>
-        <button onClick={startDeleteHandler}>Delete</button>
-      </menu>
+      {token && (
+        <menu className="actions">
+          <Link to="edit">Edit</Link>
+          <button onClick={startDeleteHandler}>Delete</button>
+        </menu>
+      )}
     </Styled>
   );
 };

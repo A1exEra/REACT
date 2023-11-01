@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
 import NewsLetterSignup from '../NewsLetterSignup';
+import { ReactNode } from 'react';
 const MainNavigation = () => {
+  const token = useRouteLoaderData('root');
   return (
     <Styled>
       <nav>
@@ -27,6 +29,22 @@ const MainNavigation = () => {
               Newsletter
             </NavLink>
           </li>
+          {!token && (
+            <li>
+              <NavLink
+                to="auth/?mode=login"
+                className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                Authentication
+              </NavLink>
+            </li>
+          )}
+          {(token as ReactNode) && (
+            <li>
+              <Form action="logout" method="post">
+                <button>Logout</button>
+              </Form>
+            </li>
+          )}
         </ul>
       </nav>
       <NewsLetterSignup />
@@ -45,6 +63,20 @@ const Styled = styled.header`
   .list {
     display: flex;
     gap: 1rem;
+    button {
+      font: inherit;
+      cursor: pointer;
+      /* padding: 0.5rem 1.5rem; */
+      border-radius: 4px;
+
+      background-color: transparent;
+      color: ${({ theme }) => theme.colors.primary400};
+      border: none;
+      &:hover,
+      &.active {
+        color: ${({ theme }) => theme.colors.primary800};
+      }
+    }
     a {
       text-decoration: none;
       color: ${({ theme }) => theme.colors.primary400};

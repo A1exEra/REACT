@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './assets/styles/globalStyles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -14,16 +15,22 @@ import {
   patchOrPostEventActions,
   deleteEvent,
   getEventById,
+  authentication,
 } from './components/utils/HTTP';
 import ErrorPage from './Pages/ErrorPage';
 import NewsLetterPage, {
   action as newsletterAction,
 } from './Pages/NewsLetterPage';
+import AuthPage from './Pages/AuthPage';
+import { logout } from './Pages/Logout';
+import { checkAuthLoader, tokenLoader } from './components/utils/auth';
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id: 'root',
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
@@ -49,6 +56,7 @@ const router = createBrowserRouter([
                 path: 'edit',
                 element: <EditEventPage />,
                 action: patchOrPostEventActions,
+                loader: checkAuthLoader as any,
               },
             ],
           },
@@ -56,6 +64,7 @@ const router = createBrowserRouter([
             path: 'new',
             element: <NewEventPage />,
             action: patchOrPostEventActions,
+            loader: checkAuthLoader as any,
           },
         ],
       },
@@ -63,6 +72,15 @@ const router = createBrowserRouter([
         path: 'newsletter',
         element: <NewsLetterPage />,
         action: newsletterAction,
+      },
+      {
+        path: 'auth',
+        element: <AuthPage />,
+        action: authentication,
+      },
+      {
+        path: 'logout',
+        action: logout,
       },
     ],
   },

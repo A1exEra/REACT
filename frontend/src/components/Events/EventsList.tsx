@@ -29,6 +29,10 @@ export default EventsList;
 const Styled = styled.div`
   margin: 2rem auto;
   max-width: 40rem;
+  h1 {
+    text-align: center;
+    margin-bottom: 16px;
+  }
   .list {
     display: flex;
     flex-direction: column;
