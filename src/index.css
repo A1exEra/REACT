@@ -91,15 +91,20 @@ ul {
 
 .content-section h2 {
   font-size: 2rem;
+  text-align: center;
   font-family: 'Quicksand', sans-serif;
   margin: 2rem auto;
   color: #b6cad5;
 }
 
 .events-list {
-  max-width: 60rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  /* max-width: 60rem; */
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); */
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  justify-content: center;
   gap: 3rem;
 }
 
